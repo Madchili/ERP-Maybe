@@ -1,0 +1,168 @@
+- .env.local
+- .eslintrc.json
+- .gitignore
++ .next
+  - app-build-manifest.json
+  - build-manifest.json
+  + cache
+    + swc
+      + plugins
+        + v7_windows_x86_64_0.106.15
+    + webpack
+      + client-development
+        - 0.pack.gz
+        - 1.pack.gz
+        - 10.pack.gz
+        - 11.pack.gz
+        - 12.pack.gz
+        - 13.pack.gz
+        - 14.pack.gz
+        - 15.pack.gz
+        - 2.pack.gz
+        - 3.pack.gz
+        - 4.pack.gz
+        - 5.pack.gz
+        - 6.pack.gz
+        - 7.pack.gz
+        - 8.pack.gz
+        - 9.pack.gz
+        - index.pack.gz
+        - index.pack.gz.old
+      + client-development-fallback
+        - 0.pack.gz
+        - index.pack.gz
+      + server-development
+        - 0.pack.gz
+        - 1.pack.gz
+        - 10.pack.gz
+        - 11.pack.gz
+        - 12.pack.gz
+        - 13.pack.gz
+        - 14.pack.gz
+        - 15.pack.gz
+        - 16.pack.gz
+        - 17.pack.gz
+        - 18.pack.gz
+        - 2.pack.gz
+        - 3.pack.gz
+        - 4.pack.gz
+        - 5.pack.gz
+        - 6.pack.gz
+        - 7.pack.gz
+        - 8.pack.gz
+        - 9.pack.gz
+        - index.pack.gz
+        - index.pack.gz.old
+  - package.json
+  - react-loadable-manifest.json
+  + server
+    + app
+      + favicon.ico
+        - route.js
+      - page.js
+      - page_client-reference-manifest.js
+      + userform
+        - page.js
+        - page_client-reference-manifest.js
+    - app-paths-manifest.json
+    - interception-route-rewrite-manifest.js
+    - middleware-build-manifest.js
+    - middleware-manifest.json
+    - middleware-react-loadable-manifest.js
+    - next-font-manifest.js
+    - next-font-manifest.json
+    - pages-manifest.json
+    - server-reference-manifest.js
+    - server-reference-manifest.json
+    + vendor-chunks
+      - @swc.js
+      - next.js
+    - webpack-runtime.js
+  + static
+    + chunks
+      + app
+        - layout.js
+        - page.js
+        + userform
+          - page.js
+      - app-pages-internals.js
+      - main-app.js
+      - polyfills.js
+      - webpack.js
+    + css
+      + app
+        - layout.css
+    + development
+      - _buildManifest.js
+      - _ssgManifest.js
+    + media
+      - 05a31a2ca4975f99-s.woff2
+      - 513657b02c5c193f-s.woff2
+      - 51ed15f9841b9f9d-s.woff2
+      - c9a5bc6a7c948fb0-s.p.woff2
+      - d6b16ce4a6175f26-s.woff2
+      - ec159349637c90ad-s.woff2
+      - fd4db3eb5472fc27-s.woff2
+    + webpack
+      - 633457081244afec._.hot-update.json
+      - a37508b3493898c8.webpack.hot-update.json
+      + app
+        - layout.bc6510ebbb656468.hot-update.js
+      - bc6510ebbb656468.webpack.hot-update.json
+      - webpack.a37508b3493898c8.hot-update.js
+      - webpack.bc6510ebbb656468.hot-update.js
+  - trace
+  + types
+    + app
+      - layout.ts
+      - page.ts
+      + userform
+        - page.ts
+    - package.json
+- .prettierrc.json
++ backend
+  - .env
+  - package-lock.json
+  - package.json
+  + sql
+    - create-DB.sql
+    - schema.sql
+  + src
+    - db.ts
+    - index.ts
+    + models
+      - user.ts
+    - setup-db.ts
+  - tsconfig.json
+- next-env.d.ts
+- next.config.mjs
+- package-lock.json
+- package.json
+- postcss.config.mjs
++ public
+  - next.svg
+  - vercel.svg
+- README.md
++ src
+  + app
+    - favicon.ico
+    - globals.css
+    - layout.tsx
+    - page.tsx
+    + userform
+      - page.tsx
+    + userlist
+      - page.tsx
+  + Components
+    - AddUserForm.tsx
+    - DeleteButton.tsx
+    - LoginComp.tsx
+    - Navbar.tsx
+    - UserList.tsx
+  + interfaces
+    - User.ts
+  + utils
+    - api.ts
+- structure.js
+- tailwind.config.ts
+- tsconfig.json
