@@ -11,6 +11,8 @@ const pool = new Pool({
   port: parseInt(process.env.DB_PORT || '5432', 10),
 })
 
+// Nedan är event handlers för att logga händelser som sker i poolen. Detta loggas i terminalen. Fann att det var ett bra sätt att se aktiviteten i poolen. Just nu sker lite mer saker än jag förväntar mig, framför allt "Client checked out from the pool" men det får jag undersöka en annan dag.
+
 pool.on('error', (err, client) => {
   console.error('Unexpected error on idle client', err)
   process.exit(-1)

@@ -34,7 +34,7 @@ const AddOrderForm: React.FC<AddOrderFormProps> = ({ onOrderAdded }) => {
         },
         body: JSON.stringify({
           user_id: userId,
-          progress_status: 1, // Initial progress status
+          progress_status: 1, // Initial progress status (1-5 finns i databasen)
         }),
       })
       const newOrder = await response.json()
@@ -50,11 +50,12 @@ const AddOrderForm: React.FC<AddOrderFormProps> = ({ onOrderAdded }) => {
       <div>
         <label>User:</label>
         <select
+        className="border border-gray rounded-lg p-1"
           value={userId || ''}
           onChange={(e) => setUserId(parseInt(e.target.value, 10))}
           required
         >
-          <option value="" disabled>
+          <option  value="" disabled>
             Select a user
           </option>
           {users.map((user) => (
@@ -64,7 +65,7 @@ const AddOrderForm: React.FC<AddOrderFormProps> = ({ onOrderAdded }) => {
           ))}
         </select>
       </div>
-      <button type="submit">Add Order</button>
+      <button type="submit" className="border border-gray-300 rounded-lg p-2 bg-green-300">Add Order</button>
     </form>
   )
 }

@@ -1,0 +1,5 @@
+
+
+
+Jag testade att separera funktionerna eller mina "event-handlers" i olika TS filer
+beroende på vilken del av webbsidan de berör.'
