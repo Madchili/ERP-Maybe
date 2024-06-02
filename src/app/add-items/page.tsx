@@ -5,7 +5,7 @@ import AddItemForm from '@/Components/AddItemForm'
 import { fetchItems } from '@/utils/api'
 import { Item } from '@/interfaces/Items'
 import { Order } from '@/interfaces/Order'
-import { fetchOrders } from '@/utils/api' // Ensure this import is correct
+import { fetchOrders } from '@/utils/api'
 
 const AddItemsPage = () => {
   const [orders, setOrders] = useState<Order[]>([])
@@ -53,6 +53,7 @@ const AddItemsPage = () => {
       <div>
         <label>Select Order:</label>
         <select
+        className="border border-gray rounded-lg p-1"
           value={selectedOrder || ''}
           onChange={(e) => setSelectedOrder(parseInt(e.target.value, 10))}
         >
@@ -77,6 +78,7 @@ const AddItemsPage = () => {
                 {typeof item.item_price === 'number'
                   ? item.item_price.toFixed(2)
                   : '0.00'}
+                  {/* Jag får den inte att lägga in rätt pris här tyvärr :() */}
               </li>
             ))}
           </ul>

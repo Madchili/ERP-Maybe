@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react'
 import UserList from '../../Components/UserList'
 import AddUserForm from '../../Components/AddUserForm'
 import { fetchUsers } from '../../utils/api'
-import { PublicUser } from '../../interfaces/User' // Ensure correct path
+import { PublicUser } from '../../interfaces/User'
 
 const ModifyUserPage = () => {
   const [users, setUsers] = useState<PublicUser[]>([])

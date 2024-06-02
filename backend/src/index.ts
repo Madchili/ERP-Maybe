@@ -19,7 +19,7 @@ const pool = new Pool({
   port: parseInt(process.env.DB_PORT || '5432', 10),
 })
 
-// User Routes
+// MARK: User Routes
 app.get('/api/users/:id', async (req, res) => {
   const id = parseInt(req.params.id, 10)
   if (isNaN(id)) {
@@ -71,7 +71,7 @@ app.delete('/api/users/:id', async (req, res) => {
   res.json(users)
 })
 
-// Order Routes
+// MARK: Order Routes
 app.get('/api/orders', async (req, res) => {
   const orders = await getAllOrders()
   res.json(orders)
@@ -79,15 +79,15 @@ app.get('/api/orders', async (req, res) => {
 
 app.post('/api/orders', async (req, res) => {
   const { user_id } = req.body
-  const progress_status = 1 // Initial progress status
-  const total_amount = 0 // Initial total amount
+  const progress_status = 1
+  const total_amount = 0
 
   const newOrder = await createOrder(user_id, total_amount, progress_status)
   const orders = await getAllOrders()
   res.status(201).json(orders)
 })
 
-// Item Routes
+// MARK: Item Routes
 app.get('/api/orders/:orderId/items', async (req, res) => {
   const orderId = parseInt(req.params.orderId, 10)
   if (isNaN(orderId)) {

@@ -1,0 +1,4 @@
+
+
+Även här ville jag testa att separera enterfaces beroende på vad de är till för.
+Har inte så många interfaces ännu dock så det är lite glest. Men roligare att hantera.
