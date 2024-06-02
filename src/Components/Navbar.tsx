@@ -1,6 +1,6 @@
-'use client';
+'use client'
 
-import Link from 'next/link';
+import Link from 'next/link'
 
 const Navbar = () => {
   return (
@@ -18,9 +18,15 @@ const Navbar = () => {
         <Link href="/modifyuser" passHref>
           <span className="text-white no-underline">Mod User</span>
         </Link>
+        <Link href="/add-items" passHref>
+          <span className="text-white no-underline">Add items</span>
+        </Link>
+        <Link href="/add-orders" passHref>
+          <span className="text-white no-underline">Add Order</span>
+        </Link>
       </div>
     </nav>
-  );
-};
+  )
+}
 
-export default Navbar;
+export default Navbar

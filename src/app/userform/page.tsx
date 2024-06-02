@@ -1,63 +1,49 @@
-'use client';
+'use client'
 
-import React, { useState, useEffect, useCallback } from 'react';
-import UserList from '@/Components/UserList';
-import AddUserForm from '@/Components/AddUserForm'; // Ensure correct path
-import { fetchUsers, createUser } from '@/utils/api';
-import { PublicUser, InternalUser } from '@/interfaces/User';
+import React, { useState, useEffect } from 'react'
+import UserList from '../../Components/UserList'
+import AddUserForm from '../../Components/AddUserForm'
+import { fetchUsers } from '../../utils/api'
+import { PublicUser } from '../../interfaces/User' // Ensure correct path
 
 const HomePage = () => {
-  const [users, setUsers] = useState<PublicUser[]>([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  const handleUpdateUsers = useCallback((updatedUsers: PublicUser[]) => {
-    setUsers(updatedUsers);
-  }, []);
+  const [users, setUsers] = useState<PublicUser[]>([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const loadUsers = async () => {
       try {
-        const data = await fetchUsers();
-        const userDummyPW = data.map(user => ({
-          ...user,
-          password: 'DummyPW', // Add dummy password
-        }));
-        setUsers(userDummyPW);
-      } catch (error: any) {
-        setError(error.message);
+        const response = await fetchUsers()
+        setUsers(response)
+      } catch (error) {
+        console.error('Error fetching users:', error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
-
-    loadUsers();
-  }, []); // Ensure dependency array is correct
-
-  const handleAddUser = async (username: string, password: string, email: string) => {
-    try {
-      const newUser: InternalUser = await createUser(username, password, email);
-      const publicUser: PublicUser = {
-        id: newUser.id,
-        username: newUser.username,
-        email: newUser.email,
-      };
-      setUsers((prevUsers) => [...prevUsers, publicUser]);
-    } catch (error) {
-      console.error('Error creating user:', error);
     }
-  };
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+    loadUsers()
+  }, [])
+
+  const handleAddUser = (newUser: PublicUser) => {
+    setUsers((prevUsers) => [...prevUsers, newUser])
+  }
+
+  const handleUpdateUsers = (updatedUsers: PublicUser[]) => {
+    setUsers(updatedUsers)
+  }
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
 
   return (
-    <div className="p-4">
-      <h1>Bästa sidan</h1>
-      <AddUserForm onUpdateUsers={handleAddUser} />
+    <div>
+      <h1>Lägg till användare</h1>
+      <AddUserForm onAddUser={handleAddUser} />
       <UserList initialUsers={users} onUpdateUsers={handleUpdateUsers} />
     </div>
-  );
-};
+  )
+}
 
-export default HomePage;
+export default HomePage
