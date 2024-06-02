@@ -1,15 +1,15 @@
 // src/Components/DeleteButton.tsx
-'use client';
+'use client'
 
 interface DeleteButtonProps {
-  userId: number;
-  onDelete: (id: number) => void;
+  userId: number
+  onDelete: (id: number) => void
 }
 
 const DeleteButton = ({ userId, onDelete }: DeleteButtonProps) => {
   const handleDelete = () => {
-    onDelete(userId);
-  };
+    onDelete(userId)
+  }
 
   return (
     <button
@@ -18,7 +18,7 @@ const DeleteButton = ({ userId, onDelete }: DeleteButtonProps) => {
     >
       Delete
     </button>
-  );
-};
+  )
+}
 
-export default DeleteButton;
+export default DeleteButton

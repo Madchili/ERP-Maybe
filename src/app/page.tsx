@@ -1,4 +1,4 @@
-import LoginComp from '@/Components/LoginComp';
+import LoginComp from '@/Components/LoginComp'
 // import AddUserForm from '../Components/AddUserForm';
 
 const HomePage = () => {
@@ -7,7 +7,7 @@ const HomePage = () => {
       <h1>Bästa sidan</h1>
       <LoginComp />
     </div>
-  );
-};
+  )
+}
 
 export default HomePage

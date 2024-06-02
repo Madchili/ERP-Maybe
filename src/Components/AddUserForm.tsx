@@ -1,38 +1,42 @@
-'use client';
+'use client'
 
-import React, { useState } from 'react';
-import { createUser } from '../utils/api';
-import { PublicUser, InternalUser } from '../interfaces/User';
+import React, { useState } from 'react'
+import { createUser } from '../utils/api'
+import { PublicUser, InternalUser } from '../interfaces/User'
 
 interface AddUserFormProps {
-  onAddUser: (newUser: PublicUser) => void;
-  onUpdateUsers: (updatedUsers: PublicUser[]) => void;
+  onAddUser: (newUser: PublicUser) => void
 }
 
 const AddUserForm: React.FC<AddUserFormProps> = ({ onAddUser }) => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('')
+  const [password, setPassword] = useState('')
+  const [email, setEmail] = useState('')
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
+    e.preventDefault()
     try {
-      const newUser: InternalUser = await createUser(username, password, email);
+      const newUser: InternalUser = await createUser(username, password, email)
       const publicUser: PublicUser = {
         id: newUser.id,
         username: newUser.username,
         email: newUser.email,
-      };
-      onAddUser(publicUser);
+      }
+      onAddUser(publicUser)
     } catch (error) {
-      console.error('Error creating user:', error);
+      console.error('Error creating user:', error)
     }
-  };
+  }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 p-6 bg-white shadow-md rounded">
+    <form
+      onSubmit={handleSubmit}
+      className="space-y-4 p-6 bg-white shadow-md rounded"
+    >
       <div className="flex flex-col">
-        <label htmlFor="username" className="mb-2 font-medium text-gray-700">Username</label>
+        <label htmlFor="username" className="mb-2 font-medium text-gray-700">
+          Username
+        </label>
         <input
           type="text"
           id="username"
@@ -43,7 +47,9 @@ const AddUserForm: React.FC<AddUserFormProps> = ({ onAddUser }) => {
         />
       </div>
       <div className="flex flex-col">
-        <label htmlFor="password" className="mb-2 font-medium text-gray-700">Password</label>
+        <label htmlFor="password" className="mb-2 font-medium text-gray-700">
+          Password
+        </label>
         <input
           type="password"
           id="password"
@@ -54,7 +60,9 @@ const AddUserForm: React.FC<AddUserFormProps> = ({ onAddUser }) => {
         />
       </div>
       <div className="flex flex-col">
-        <label htmlFor="email" className="mb-2 font-medium text-gray-700">Email</label>
+        <label htmlFor="email" className="mb-2 font-medium text-gray-700">
+          Email
+        </label>
         <input
           type="email"
           id="email"
@@ -64,9 +72,14 @@ const AddUserForm: React.FC<AddUserFormProps> = ({ onAddUser }) => {
           onChange={(e) => setEmail(e.target.value)}
         />
       </div>
-      <button type="submit" className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500">Add User</button>
+      <button
+        type="submit"
+        className="w-full p-2 bg-blue-500 text-white rounded hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500"
+      >
+        Add User
+      </button>
     </form>
-  );
-};
+  )
+}
 
-export default AddUserForm;
+export default AddUserForm
