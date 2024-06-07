@@ -2,25 +2,25 @@
 
 import React, { useState, useEffect } from 'react'
 import { fetchUsers } from '../utils/api'
-import { PublicUser, User } from '../interfaces/User'
+import { PublicUser, User, InternalUser } from '../interfaces/User'
 
 const LoginComp = () => {
-  const [users, setUsers] = useState<User[]>([])
+  const [users, setUsers] = useState<InternalUser[]>([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [loginMessage, setLoginMessage] = useState<string | null>(null)
+  // const [countDown, setCountDown] = useState(3)
 
   useEffect(() => {
     const loadUsers = async () => {
       try {
         const data = await fetchUsers()
-        const userDummyPW = data.map((user) => ({
-          ...user,
-          password: 'DummyPW',
-        }))
-        setUsers(userDummyPW)
+        console.log('Users:', data)
+
+
+        setUsers(data)
       } catch (error: any) {
         setError(error.message)
       } finally {
@@ -29,7 +29,10 @@ const LoginComp = () => {
     }
 
     loadUsers()
+
   }, [])
+
+
 
   const handleLogin = (e: React.FormEvent) => {
     e.preventDefault()
@@ -37,9 +40,17 @@ const LoginComp = () => {
       (user) => user.username === username && user.password === password,
     )
     if (user) {
-      setLoginMessage('User logged in successfully!')
-      console.log('User logged in:', user)
+
+      setLoginMessage(`Login successful! Redirecting in 3 seconds...`)
+
+      for (let i = 3; i > 0; i--) {
+        setTimeout(() => {  setLoginMessage(`Login successful! Redirecting in ${i} seconds...`); }, 1000)
+
+      }
+      setTimeout(() => {  window.location.href = '/userform'; }, 3000);
+
     } else {
+
       setLoginMessage('Invalid username or password')
       console.log('Invalid username or password')
     }
@@ -49,11 +60,11 @@ const LoginComp = () => {
   if (error) return <div>Error: {error}</div>
 
   return (
-    <div className="p-4 max-w-6xl mx-auto">
+    <div className="p-4 mx-auto">
       <h2 className="text-2xl font-bold mb-4">Login</h2>
       <form
         onSubmit={handleLogin}
-        className="max-w-lg mx-auto p-4 bg-white shadow-md rounded"
+        className="mx-auto p-4 bg-white shadow-md rounded"
       >
         <div className="mb-4">
           <label className="block text-gray-700 text-sm font-bold mb-2">

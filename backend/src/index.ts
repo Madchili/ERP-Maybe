@@ -66,7 +66,15 @@ app.delete('/api/users/:id', async (req, res) => {
   if (!user) {
     return res.status(404).send('User not found')
   }
+
+  // Delete user's orders and items. This could be done with cascading functionallity in the database also but i wanted to see if it works like this.
+
+  await pool.query('DELETE FROM items WHERE order_id IN (SELECT id FROM orders WHERE user_id = $1)', [id])
+
+  await pool.query('DELETE FROM orders WHERE user_id = $1', [id])
+
   await pool.query('DELETE FROM users WHERE id = $1', [id])
+
   const users = await getAllUsers()
   res.json(users)
 })
@@ -102,7 +110,7 @@ app.post('/api/orders/:orderId/items', async (req, res) => {
   if (isNaN(orderId)) {
     return res.status(400).send('Invalid order ID')
   }
-  const { item_name, item_price } = req.body
+  const { item_name, item_price }: { item_name: string, item_price: number } = req.body
   const newItem = await createItem(orderId, item_name, item_price)
   const items = await getItemsByOrderId(orderId)
   res.status(201).json(items)

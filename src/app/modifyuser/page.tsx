@@ -39,13 +39,16 @@ const ModifyUserPage = () => {
 
   return (
     <div>
-      <h1 className="text-3xl text-red-500 my-5">
-        Denna sidan fungerar inte nej :)
+
+      <h1 className="text-3xl text-red-500 my-5">Denna sidan fungerar inte nej :)
       </h1>
+    <div className="flex space-x-10" >
       <AddUserForm onAddUser={handleAddUser} />
       <UserList initialUsers={users} onUpdateUsers={handleUpdateUsers} />
     </div>
+    </div>
   )
+
 }
 
 export default ModifyUserPage

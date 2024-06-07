@@ -1,7 +1,7 @@
 'use client'
 
 import React, { useState } from 'react'
-import { createUser } from '../utils/api'
+import { createUser, fetchUsers } from '../utils/api'
 import { PublicUser, InternalUser } from '../interfaces/User'
 
 interface AddUserFormProps {
@@ -12,6 +12,7 @@ const AddUserForm: React.FC<AddUserFormProps> = ({ onAddUser }) => {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [email, setEmail] = useState('')
+  const [UserAdded, setUserAdded] = useState<string | null>(null)
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -23,6 +24,7 @@ const AddUserForm: React.FC<AddUserFormProps> = ({ onAddUser }) => {
         email: newUser.email,
       }
       onAddUser(publicUser)
+      setUserAdded('User added successfully!')
     } catch (error) {
       console.error('Error creating user:', error)
     }
@@ -78,6 +80,7 @@ const AddUserForm: React.FC<AddUserFormProps> = ({ onAddUser }) => {
       >
         Add User
       </button>
+      {UserAdded && <div className="text-red-500">{UserAdded}</div>}
     </form>
   )
 }

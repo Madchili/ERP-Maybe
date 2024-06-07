@@ -1,8 +1,11 @@
+
 import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
-import Navbar from '@/Components/Navbar'
-import { ReactNode, FC } from 'react'
+import ConditionalNavbar from '../Components/ConditionalNavbar'
+// import Navbar from '@/Components/Navbar'
+// import { usePathname } from 'next/navigation'
+// import { ReactNode, FC } from 'react'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -16,13 +19,16 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+
   return (
     <html lang="en">
-      <body
-        className={`${inter.className} flex flex-col min-h-screen items-center justify-center bg-gray-100`}
-      >
-        <Navbar />
+      <body>
+      {<ConditionalNavbar />}
+        <main className={`${inter.className} flex flex-col min-h-screen w-full items-center justify-center bg-gray-100`}>
         {children}
+          </main>
+
+
       </body>
     </html>
   )

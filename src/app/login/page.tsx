@@ -3,10 +3,9 @@ import LoginComp from '@/Components/LoginComp'
 
 const HomePage = () => {
   return (
-    <div className="flex items-center flex-col">
-      {/* <h1>Bästa sidan</h1> */}
+    <div>
+      <h1>This page is no longer needed :)</h1>
       <LoginComp />
-      <div>Användare: <strong>hej</strong> Password: <strong>pw</strong></div>
     </div>
   )
 }

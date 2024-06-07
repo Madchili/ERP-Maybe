@@ -28,8 +28,8 @@ const AddOrdersPage = () => {
   }
 
   return (
-    <div className="p-6 bg-gray-50 min-h-screen">
-      <h1 className="text-3xl font-bold text-blue-600 mb-4 border border-gray-300 rounded-lg">Add Orders</h1>
+    <div className="p-6 bg-gray-50 min-h-screen w-[350px] flex flex-col items-center">
+      <h1 className="text-3xl font-bold text-blue-600 mb-4">Add Orders</h1>
       <div className="mb-6">
         <AddOrderForm onOrderAdded={handleOrderAdded} />
       </div>

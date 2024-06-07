@@ -2,13 +2,17 @@ const API_URL = 'http://localhost:5000/api'
 import { PublicUser } from '../interfaces/User'
 import { InternalUser } from '../interfaces/User'
 
-export const fetchUsers = async (): Promise<PublicUser[]> => {
+// MARK: Fetch User By ID
+
+export const fetchUsers = async (): Promise<InternalUser[]> => {
   const response = await fetch(`${API_URL}/users`)
   if (!response.ok) {
     throw new Error('Error fetching users')
   }
   return response.json()
 }
+
+// MARK: Create User
 
 export const createUser = async (
   username: string,
@@ -28,6 +32,8 @@ export const createUser = async (
   return response.json()
 }
 
+// MARK: Delete User
+
 export const deleteUser = async (id: number): Promise<{ success: boolean }> => {
   const response = await fetch(`${API_URL}/users/${id}`, {
     method: 'DELETE',
@@ -37,6 +43,7 @@ export const deleteUser = async (id: number): Promise<{ success: boolean }> => {
   }
   return response.json()
 }
+// MARK: Fetch Orders
 
 export async function fetchOrders() {
   const response = await fetch('http://localhost:5000/api/orders')
@@ -46,6 +53,8 @@ export async function fetchOrders() {
   const orders = await response.json()
   return orders
 }
+
+// MARK:Fetch items
 
 export async function fetchItems(orderId: number) {
   const response = await fetch(
@@ -57,6 +66,8 @@ export async function fetchItems(orderId: number) {
   const items = await response.json()
   return items
 }
+
+// MARK: Create Item
 
 export async function createItem(
   orderId: number,

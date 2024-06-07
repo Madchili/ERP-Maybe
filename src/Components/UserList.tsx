@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { PublicUser } from '../interfaces/User'
+import { deleteUser } from '../utils/api'
 
 interface UserListProps {
   initialUsers: PublicUser[]
@@ -16,14 +17,15 @@ const UserList: React.FC<UserListProps> = ({ initialUsers, onUpdateUsers }) => {
   }, [initialUsers])
 
   const handleDeleteUser = (id: number) => {
+    deleteUser(id)
     const updatedUsers = users.filter((user) => user.id !== id)
     setUsers(updatedUsers)
-    onUpdateUsers(updatedUsers) // Notify parent component
+    onUpdateUsers(updatedUsers)
   }
 
   return (
     <div>
-      <h2 className="text-xl mb-4">User List</h2>
+      {/* <h2 className="text-xl mb-4">User List</h2> */}
       <ul>
         {users.map((user) => (
           <li key={user.id} className="mb-2 flex justify-between items-center">

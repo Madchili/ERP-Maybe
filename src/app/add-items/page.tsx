@@ -67,7 +67,7 @@ const AddItemsPage = () => {
           ))}
         </select>
       </div>
-      {selectedOrder && (
+      {selectedOrder ? (
         <>
           <AddItemForm orderId={selectedOrder} onItemAdded={handleItemAdded} />
           <h2>Items in Order</h2>
@@ -83,7 +83,12 @@ const AddItemsPage = () => {
             ))}
           </ul>
         </>
-      )}
+      ) :
+      <div className="flex flex-col bg-gray-200 w=[350px] border border-gray-400 rounded-lg">
+      <p>Select an order to add items</p>
+      </div>
+      }
+
     </div>
   )
 }
