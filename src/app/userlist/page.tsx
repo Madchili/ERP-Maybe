@@ -38,10 +38,13 @@ const UserListPage = () => {
   }
 
   return (
-    <div>
-      <h1 className="text-5xl py-10">Visar bara user-list</h1>
-      {/* <AddUserForm onAddUser={handleAddUser} /> */}
+    <div className="flex flex-col items-center">
+    <h1 className="text-4xl py-5 font-bold">Visar bara user-list</h1>
+    <div className="w-[400px] flex flex-col h-[400px]  border border-black rounded-lg">
+      <div className="overflow-y-auto m-1 p-3">
       <UserList initialUsers={users} onUpdateUsers={handleUpdateUsers} />
+      </div>
+    </div>
     </div>
   )
 }

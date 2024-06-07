@@ -27,7 +27,6 @@ CREATE TABLE IF NOT EXISTS items (
   created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Function to update total amount when an item is inserted or updated
 CREATE OR REPLACE FUNCTION update_order_total_on_insert_update()
 RETURNS TRIGGER AS $$
 BEGIN

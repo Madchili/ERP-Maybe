@@ -38,11 +38,17 @@ const HomePage = () => {
   }
 
   return (
-    <div>
-      <h1>Lägg till användare</h1>
-      <AddUserForm onAddUser={handleAddUser} />
-      <UserList initialUsers={users} onUpdateUsers={handleUpdateUsers} />
-    </div>
+    <div className="flex flex-col items-center">
+    <h1 className="text-3xl my-4">Lägg till användare</h1>
+    <div className="flex">
+        <div className="h-[350px]">
+          <AddUserForm onAddUser={handleAddUser} />
+        </div>
+        {/* <div className="h-[350px] overflow-y-auto px-5 w-fit">
+          <UserList initialUsers={users} onUpdateUsers={handleUpdateUsers}/>
+        </div> */}
+      </div>
+      </div>
   )
 }
 

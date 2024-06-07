@@ -46,7 +46,11 @@ const AddOrderForm: React.FC<AddOrderFormProps> = ({ onOrderAdded }) => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+
+    <div
+    className="w-[350px] flex flex-col items-center justify-center"
+    >
+    <form onSubmit={handleSubmit} className="flex flex-col items-center">
       <div>
         <label>User:</label>
         <select
@@ -65,8 +69,9 @@ const AddOrderForm: React.FC<AddOrderFormProps> = ({ onOrderAdded }) => {
           ))}
         </select>
       </div>
-      <button type="submit" className="border border-gray-300 rounded-lg p-2 bg-green-300">Add Order</button>
+      <button type="submit" className="border border-gray-300 rounded-lg p-2 bg-green-300 my-2">Add Order</button>
     </form>
+    </div>
   )
 }
 
