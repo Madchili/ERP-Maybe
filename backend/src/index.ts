@@ -1,9 +1,10 @@
 import express from 'express'
 import cors from 'cors'
 import { getUserById, createUser, getAllUsers } from './models/user'
-import { Pool } from 'pg'
+// import { Pool } from 'pg'
 import { createOrder, getAllOrders } from './models/order'
 import { createItem, getItemsByOrderId } from './models/item'
+import pool from './db'
 
 const app = express()
 const port = process.env.PORT || 5000
@@ -11,13 +12,13 @@ const port = process.env.PORT || 5000
 app.use(cors())
 app.use(express.json())
 
-const pool = new Pool({
-  user: process.env.DB_USER,
-  host: process.env.DB_HOST,
-  database: process.env.DB_NAME,
-  password: process.env.DB_PASSWORD,
-  port: parseInt(process.env.DB_PORT || '5432', 10),
-})
+// const pool = new Pool({
+//   user: process.env.DB_USER,
+//   host: process.env.DB_HOST,
+//   database: process.env.DB_NAME,
+//   password: process.env.DB_PASSWORD,
+//   port: parseInt(process.env.DB_PORT || '5432', 10),
+// })
 
 // MARK: User Routes
 app.get('/api/users/:id', async (req, res) => {
