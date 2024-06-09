@@ -21,7 +21,7 @@ app.use(express.json())
 // })
 
 // MARK: User Routes
-app.get('/api/users/:id', async (req, res) => {
+app.get('/users/:id', async (req, res) => {
   const id = parseInt(req.params.id, 10)
   if (isNaN(id)) {
     return res.status(400).send('Invalid user ID')
@@ -34,12 +34,12 @@ app.get('/api/users/:id', async (req, res) => {
   }
 })
 
-app.get('/api/users', async (req, res) => {
+app.get('/users', async (req, res) => {
   const users = await getAllUsers()
   res.json(users)
 })
 
-app.post('/api/users', async (req, res) => {
+app.post('/users', async (req, res) => {
   const { username, password, email } = req.body
   try {
     const newUser = await createUser(username, password, email)
@@ -58,7 +58,7 @@ app.post('/api/users', async (req, res) => {
   }
 })
 
-app.delete('/api/users/:id', async (req, res) => {
+app.delete('/users/:id', async (req, res) => {
   const id = parseInt(req.params.id, 10)
   if (isNaN(id)) {
     return res.status(400).send('Invalid user ID')
@@ -81,12 +81,12 @@ app.delete('/api/users/:id', async (req, res) => {
 })
 
 // MARK: Order Routes
-app.get('/api/orders', async (req, res) => {
+app.get('/orders', async (req, res) => {
   const orders = await getAllOrders()
   res.json(orders)
 })
 
-app.post('/api/orders', async (req, res) => {
+app.post('/orders', async (req, res) => {
   const { user_id } = req.body
   const progress_status = 1
   const total_amount = 0
@@ -97,7 +97,7 @@ app.post('/api/orders', async (req, res) => {
 })
 
 // MARK: Item Routes
-app.get('/api/orders/:orderId/items', async (req, res) => {
+app.get('/orders/:orderId/items', async (req, res) => {
   const orderId = parseInt(req.params.orderId, 10)
   if (isNaN(orderId)) {
     return res.status(400).send('Invalid order ID')
@@ -106,7 +106,7 @@ app.get('/api/orders/:orderId/items', async (req, res) => {
   res.json(items)
 })
 
-app.post('/api/orders/:orderId/items', async (req, res) => {
+app.post('/orders/:orderId/items', async (req, res) => {
   const orderId = parseInt(req.params.orderId, 10)
   if (isNaN(orderId)) {
     return res.status(400).send('Invalid order ID')
