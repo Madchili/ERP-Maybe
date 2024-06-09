@@ -1,0 +1,76 @@
+- .env.local
+- .eslintrc.json
+- .gitignore
+- .prettierrc.json
++ .vscode
+  - settings.json
++ 01-Tailwind-syntax
+  - tailwind-border.md
+  - tailwind-element-sizing.md
+  - tailwind-font.md
++ backend
+  - .env
+  - package-lock.json
+  - package.json
+  + sql
+    - create-DB.sql
+    - schema.sql
+  + src
+    - db.ts
+    - index.ts
+    + models
+      - Info.txt
+      - item.ts
+      - order.ts
+      - user.ts
+    - setup-db.ts
+  - tsconfig.json
+- next-env.d.ts
+- next.config.mjs
+- package-lock.json
+- package.json
+- postcss.config.mjs
++ public
+  - next.svg
+  - vercel.svg
+- README.md
++ src
+  + app
+    + add-items
+      - page.tsx
+    + add-orders
+      - page.tsx
+    - favicon.ico
+    - globals.css
+    - layout.tsx
+    + login
+      - page.tsx
+    + modifyuser
+      - info.txt
+      - page.tsx
+    - page.tsx
+    + userform
+      - page.tsx
+    + userlist
+      - page.tsx
+  + Components
+    - AddItemForm.tsx
+    - AddOrderForm.tsx
+    - AddUserForm.tsx
+    - ConditionalNavbar.tsx
+    - DeleteButton.tsx
+    - LoginComp.tsx
+    - ModifyUserForm.tsx
+    - Navbar.tsx
+    - UserList.tsx
+  + interfaces
+    - info.txt
+    - Items.ts
+    - Order.ts
+    - User.ts
+  + utils
+    - api.ts
+- structure.js
+- structure.txt
+- tailwind.config.ts
+- tsconfig.json
