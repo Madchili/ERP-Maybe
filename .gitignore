@@ -10,13 +10,13 @@
 /coverage
 
 # next.js
-front-end/.next/
-front-end/out/
+frontend/.next/
+frontend/out/
 
 # production
 /build
-front-end/structure.js
-front-end/structure.txt
+frontend/structure.js
+frontend/structure.txt
 
 # misc
 .DS_Store
@@ -28,9 +28,9 @@ yarn-debug.log*
 yarn-error.log*
 
 # local env files
-front-end/.env*.local
+frontend/.env*.local
 backend/.env
-front-end/.env.production
+frontend/.env.production
 
 # vercel
 .vercel
@@ -38,5 +38,5 @@ front-end/.env.production
 # typescript
 *.tsbuildinfo
 next-env.d.ts
-front-end/node_modules
+frontend/node_modules
 /backend/node_modules
