@@ -31,7 +31,7 @@ app.use(express_1.default.json());
 //   port: parseInt(process.env.DB_PORT || '5432', 10),
 // })
 // MARK: User Routes
-app.get('/api/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = parseInt(req.params.id, 10);
     if (isNaN(id)) {
         return res.status(400).send('Invalid user ID');
@@ -44,11 +44,11 @@ app.get('/api/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, functi
         res.status(404).send('User not found');
     }
 }));
-app.get('/api/users', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/users', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield (0, user_1.getAllUsers)();
     res.json(users);
 }));
-app.post('/api/users', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post('/users', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password, email } = req.body;
     try {
         const newUser = yield (0, user_1.createUser)(username, password, email);
@@ -69,7 +69,7 @@ app.post('/api/users', (req, res) => __awaiter(void 0, void 0, void 0, function*
         }
     }
 }));
-app.delete('/api/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.delete('/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = parseInt(req.params.id, 10);
     if (isNaN(id)) {
         return res.status(400).send('Invalid user ID');
@@ -86,11 +86,11 @@ app.delete('/api/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, fun
     res.json(users);
 }));
 // MARK: Order Routes
-app.get('/api/orders', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/orders', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const orders = yield (0, order_1.getAllOrders)();
     res.json(orders);
 }));
-app.post('/api/orders', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post('/orders', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { user_id } = req.body;
     const progress_status = 1;
     const total_amount = 0;
@@ -99,7 +99,7 @@ app.post('/api/orders', (req, res) => __awaiter(void 0, void 0, void 0, function
     res.status(201).json(orders);
 }));
 // MARK: Item Routes
-app.get('/api/orders/:orderId/items', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/orders/:orderId/items', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const orderId = parseInt(req.params.orderId, 10);
     if (isNaN(orderId)) {
         return res.status(400).send('Invalid order ID');
@@ -107,7 +107,7 @@ app.get('/api/orders/:orderId/items', (req, res) => __awaiter(void 0, void 0, vo
     const items = yield (0, item_1.getItemsByOrderId)(orderId);
     res.json(items);
 }));
-app.post('/api/orders/:orderId/items', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post('/orders/:orderId/items', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const orderId = parseInt(req.params.orderId, 10);
     if (isNaN(orderId)) {
         return res.status(400).send('Invalid order ID');
