@@ -1,5 +1,5 @@
 // const API_URL = process.env.NEXT_PUBLIC_API_URL
-const API_URL = "https://erp-maybeoneday-6dfo.onrender.com"
+const API_URL = "https://erp-maybeoneday-6dfo.onrender.com/api"
 import { PublicUser } from '../interfaces/User'
 import { InternalUser } from '../interfaces/User'
 
