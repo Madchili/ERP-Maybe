@@ -1,11 +1,11 @@
-import { Pool } from 'pg'
-import { readFileSync } from 'fs'
-import { resolve } from 'path'
-import dotenv from 'dotenv'
+// import { Pool } from 'pg'
+// import { readFileSync } from 'fs'
+// import { resolve } from 'path'
+// import dotenv from 'dotenv'
 
-dotenv.config()
+// dotenv.config()
 
-console.log('DATABASE_URL:', process.env.DATABASE_URL)
+// console.log('DATABASE_URL:', process.env.DATABASE_URL)
 
 // const pool = new Pool({
 //   user: process.env.DB_USER,
@@ -15,19 +15,23 @@ console.log('DATABASE_URL:', process.env.DATABASE_URL)
 //   port: parseInt(process.env.DB_PORT || '5432', 10),
 // })
 
-const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
-  ssl: {
-    rejectUnauthorized: false
-  }
-});
+// const pool = new Pool({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: {
+//     rejectUnauthorized: false,
+//   },
+//   connectionTimeoutMillis: 10000,
+//   idleTimeoutMillis: 30000,
+//   max: 10,
+//   min: 0
+// });
 
-const runSQLFile = async (filePath: string) => {
-  const sql = readFileSync(resolve(filePath), 'utf-8')
-  await pool.query(sql)
-  console.log('Database setup complete.')
-}
+// const runSQLFile = async (filePath: string) => {
+//   const sql = readFileSync(resolve(filePath), 'utf-8')
+//   await pool.query(sql)
+//   console.log('Database setup complete.')
+// }
 
-runSQLFile('sql/schema.sql').catch((err) =>
-  console.error('Error setting up database:', err),
-)
+// runSQLFile('sql/schema.sql').catch((err) =>
+//   console.error('Error setting up database:', err),
+// )
