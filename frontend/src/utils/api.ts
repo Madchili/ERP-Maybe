@@ -1,5 +1,5 @@
-// const API_URL = process.env.NEXT_PUBLIC_API_URL
-const API_URL = "https://erp-maybeoneday-6dfo.onrender.com/api"
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+// const API_URL = "https://erp-maybeoneday-6dfo.onrender.com/api"
 import { PublicUser } from '../interfaces/User'
 import { InternalUser } from '../interfaces/User'
 
@@ -47,7 +47,7 @@ export const deleteUser = async (id: number): Promise<{ success: boolean }> => {
 // MARK: Fetch Orders
 
 export async function fetchOrders() {
-  const response = await fetch('`${API_URL}/users`')
+  const response = await fetch(`${API_URL}/users`)
   if (!response.ok) {
     throw new Error('Failed to fetch orders')
   }

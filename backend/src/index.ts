@@ -9,12 +9,13 @@ import pool from './db'
 const app = express()
 const port = process.env.PORT || 5000
 
-const corsOptions = {
-  origin: ['https://erp-maybe.vercel.app', 'http://localhost:3000'],
-  optionsSuccessStatus: 200,
-}
+// const corsOptions = {
+//   origin: ['https://erp-maybe.vercel.app', 'http://localhost:3000'],
+//   optionsSuccessStatus: 200,
+// }
 
-app.use(cors(corsOptions))
+// app.use(cors(corsOptions))
+app.use(cors())
 app.use(express.json())
 
 // const pool = new Pool({
