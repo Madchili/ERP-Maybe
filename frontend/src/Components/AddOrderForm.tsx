@@ -6,6 +6,8 @@ interface AddOrderFormProps {
   onOrderAdded: (order: any) => void
 }
 
+const API_URL = process.env.NEXT_PUBLIC_API_URL
+
 const AddOrderForm: React.FC<AddOrderFormProps> = ({ onOrderAdded }) => {
   const [users, setUsers] = useState<any[]>([])
   const [userId, setUserId] = useState<number | null>(null)
@@ -13,7 +15,7 @@ const AddOrderForm: React.FC<AddOrderFormProps> = ({ onOrderAdded }) => {
   useEffect(() => {
     const fetchUsers = async () => {
       try {
-        const response = await fetch('http://localhost:5000/users')
+        const response = await fetch(`${API_URL}/users`)
         const users = await response.json()
         setUsers(users)
       } catch (error) {
@@ -27,7 +29,7 @@ const AddOrderForm: React.FC<AddOrderFormProps> = ({ onOrderAdded }) => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     try {
-      const response = await fetch('http://localhost:5000/api/orders', {
+      const response = await fetch(`${API_URL}/orders`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

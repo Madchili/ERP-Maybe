@@ -8,7 +8,7 @@ import { InternalUser } from '../interfaces/User'
 export const fetchUsers = async (): Promise<InternalUser[]> => {
   const response = await fetch(`${API_URL}/users`)
   if (!response.ok) {
-    throw new Error('Error fetching users')
+    throw new Error('Error fetching users🥸')
   }
   return response.json()
 }
@@ -28,7 +28,7 @@ export const createUser = async (
     body: JSON.stringify({ username, password, email }),
   })
   if (!response.ok) {
-    throw new Error('Error creating user')
+    throw new Error('Error creating user😘')
   }
   return response.json()
 }
@@ -40,7 +40,7 @@ export const deleteUser = async (id: number): Promise<{ success: boolean }> => {
     method: 'DELETE',
   })
   if (!response.ok) {
-    throw new Error('Error deleting user')
+    throw new Error('Error deleting user😶‍🌫️')
   }
   return response.json()
 }
@@ -49,7 +49,7 @@ export const deleteUser = async (id: number): Promise<{ success: boolean }> => {
 export async function fetchOrders() {
   const response = await fetch(`${API_URL}/users`)
   if (!response.ok) {
-    throw new Error('Failed to fetch orders')
+    throw new Error('Failed to fetch orders😡')
   }
   const orders = await response.json()
   return orders
@@ -62,7 +62,7 @@ export async function fetchItems(orderId: number) {
     `${API_URL}/orders/${orderId}/items`,
   )
   if (!response.ok) {
-    throw new Error('Failed to fetch items')
+    throw new Error('Failed to fetch items🤣')
   }
   const items = await response.json()
   return items
@@ -86,7 +86,7 @@ export async function createItem(
     },
   )
   if (!response.ok) {
-    throw new Error('Failed to create item')
+    throw new Error('Failed to create item💥')
   }
   const newItem = await response.json()
   return newItem
