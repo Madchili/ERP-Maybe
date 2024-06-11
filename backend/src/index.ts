@@ -9,13 +9,13 @@ import pool from './db'
 const app = express()
 const port = process.env.PORT || 5000
 
-// const corsOptions = {
-//   origin: ['https://erp-maybe.vercel.app', 'http://localhost:3000'],
-//   optionsSuccessStatus: 200,
-// }
+const corsOptions = {
+  origin: ['https://erp-maybe.vercel.app', 'https://erp-maybe-jod1yl84f-jonas-nilssons-projects.vercel.app', 'http://localhost:3000'],
+  optionsSuccessStatus: 200,
+}
 
-// app.use(cors(corsOptions))
-app.use(cors())
+app.use(cors(corsOptions))
+// app.use(cors())
 app.use(express.json())
 
 // const pool = new Pool({
@@ -117,6 +117,11 @@ app.post('/api/orders/:orderId/items', async (req, res) => {
   if (isNaN(orderId)) {
     return res.status(400).send('Invalid order ID')
   }
+  const orderCheck = await pool.query('SELECT id FROM orders WHERE id = $1', [orderId]);
+  if (orderCheck.rowCount === 0) {
+    return res.status(400).send('Order does not exist');
+  }
+
   const { item_name, item_price }: { item_name: string, item_price: number } = req.body
   const newItem = await createItem(orderId, item_name, item_price)
   const items = await getItemsByOrderId(orderId)
