@@ -31,7 +31,7 @@ const AddOrderForm: React.FC<AddOrderFormProps> = ({ onOrderAdded }) => {
     try {
       const response = await fetch(`${API_URL}/orders`, {
         method: 'POST',
-        mode: 'no-cors',
+        // mode: 'no-cors',
         headers: {
           'Content-Type': 'application/json',
         },
