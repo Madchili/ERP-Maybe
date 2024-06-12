@@ -1,36 +1,51 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+Då ger jag officiellt upp!
 
-## Getting Started
+JAG HAR INTKLUDERAT EN KORT VIDEO I ZIP-Filen också
 
-First, run the development server:
+Jag har publicerat hemsidan på "https://erp-maybe.vercel.app/userform"
+Cors problemet mellan min server och front end försvinner inte trots explicit kod för att kringå detta detta
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+const corsOptions = {
+  origin: ['https://erp-maybe.vercel.app', 'https://erp-maybeoneday-6dfo.onrender.com', 'http://localhost:3000'],
+  optionsSuccessStatus: 200
+};
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Jag har även testat generella app.use(cors());
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Backend och server ligger på render:
+Server : https://erp-maybeoneday-6dfo.onrender.com (Men det blir ju såklart bara error)
+Databasen gick bra att publicera och att ansluta till från pgAdmin 4. Jag kunde skapa tables och allt där. Allt är skapat med samma instruktioner som jag hade att skapa min fungerande lokala databas. Kolumnerna finns men jag har ju inte möjlighet att programmatiskt lägga till någon data pga nedan random problem.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Render klarar inte av att publicera en statisk hemsida med next.js. Den kan helt enkelt inte hantera det. Vercel kan dock hantera next.js och därför går den att publicera. Dock kommer jag då inte runt cors-problemet när jag sitter där.
 
-## Learn More
+Jag har fått min lokala front-end att koppla emot min server som i sin tur skall koppla emot databasen. Men vad jag än gör så får jag 50/50 mellan 2 olika problem som har samma effekt. Och detta är att servern crashar.
 
-To learn more about Next.js, take a look at the following resources:
+Problem 1:
+  errno: -4077,
+  code: 'ECONNRESET',
+  syscall: 'read'
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Problem 2:
+  error: SSL/TLS required
+  length: 37,
+  severity: 'FATAL',
+  code: '28000',
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Det första problemet skall ha att göra med host-namnet som används för att koppla till databasen. Men jag har testat exakt alla varianter. Inklusive exakt samma som på videon på avancera.
 
-## Deploy on Vercel
+Det andra problemet är bara en ren lögn (koden ljuger)
+Jag har "?sslmode=require" i slutet av URL:en.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Och som sagt, problem 1 och 2 byter av varandra. SSL/TLS felet är inte alltid aktuellt.
+Både min lokala och publicerade variant av servern har problem att kommunicera med databasen.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Den publicerade varianten av databasen får problemet
+"Error: getaddrinfo ENOTFOUND dpg-cpk6pf20si5c73cldosg-a"
+Jag använder mig av rätt URL och har kollat på flertalet forum som säger att detta ÄR rätt. Render skall vara enkelt.
+"All of your services on Render can communicate internally on the same private network ."
+DATABASE_URL på render är "postgres://erpuser:aH0X2BQjeOQUVqnjszZFfNNazRq2bKYK@dpg-cpk6pf20si5c73cldosg-a/erpdb_xycd"*
+I enighet med vad render säger kring de tjänster man har publicerade på deras sida. Jag har också testat external URL. Och jag har testat att bryta ner pool infon till beståndsdelarna med separata host, user, password etc etc.
+
+Att köra lokalt med min lokala server fungerar utmärkt. Det är bara buggar som jag behöver tid för att justera med hela order-item upplägget. Just nu så fungerar det inte som tänkt, jag vet vad som är fel men har lagt allt fokus på att försöka publicera.
+
+Detta kan jag tyvärr inte visa trots att jag satt i nästan 10 timmar och försökte göra min lokala databas tillgänglig. Jag gick igenom port-forwarding, routade med IP adress, gav postgress acess till diverse externa IP adresser för att kunna kommunicera med min databas. När allt va sagt och gjort så fanns det 0 tecken på att det fanns någon som helst koppling mellan min publicerade server och lokala databas. Detta skall dock vara något som är möjligt, det var bara omöjligt för mig.
