@@ -15,23 +15,20 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const user_1 = require("./models/user");
-// import { Pool } from 'pg'
 const order_1 = require("./models/order");
 const item_1 = require("./models/item");
 const db_1 = __importDefault(require("./db"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 5000;
-app.use((0, cors_1.default)());
+const corsOptions = {
+    origin: ['https://erp-maybe.vercel.app', 'https://erp-maybeoneday-6dfo.onrender.com', 'http://localhost:3000'],
+    optionsSuccessStatus: 200
+};
+app.use((0, cors_1.default)(corsOptions));
+// app.use(cors());
 app.use(express_1.default.json());
-// const pool = new Pool({
-//   user: process.env.DB_USER,
-//   host: process.env.DB_HOST,
-//   database: process.env.DB_NAME,
-//   password: process.env.DB_PASSWORD,
-//   port: parseInt(process.env.DB_PORT || '5432', 10),
-// })
 // MARK: User Routes
-app.get('/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/api/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = parseInt(req.params.id, 10);
     if (isNaN(id)) {
         return res.status(400).send('Invalid user ID');
@@ -44,11 +41,11 @@ app.get('/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* 
         res.status(404).send('User not found');
     }
 }));
-app.get('/users', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/api/users', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const users = yield (0, user_1.getAllUsers)();
     res.json(users);
 }));
-app.post('/users', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post('/api/users', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { username, password, email } = req.body;
     try {
         const newUser = yield (0, user_1.createUser)(username, password, email);
@@ -69,7 +66,7 @@ app.post('/users', (req, res) => __awaiter(void 0, void 0, void 0, function* () 
         }
     }
 }));
-app.delete('/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.delete('/api/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const id = parseInt(req.params.id, 10);
     if (isNaN(id)) {
         return res.status(400).send('Invalid user ID');
@@ -78,7 +75,6 @@ app.delete('/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, functio
     if (!user) {
         return res.status(404).send('User not found');
     }
-    // Delete user's orders and items. This could be done with cascading functionallity in the database also but i wanted to see if it works like this.
     yield db_1.default.query('DELETE FROM items WHERE order_id IN (SELECT id FROM orders WHERE user_id = $1)', [id]);
     yield db_1.default.query('DELETE FROM orders WHERE user_id = $1', [id]);
     yield db_1.default.query('DELETE FROM users WHERE id = $1', [id]);
@@ -86,11 +82,11 @@ app.delete('/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, functio
     res.json(users);
 }));
 // MARK: Order Routes
-app.get('/orders', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/api/orders', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const orders = yield (0, order_1.getAllOrders)();
     res.json(orders);
 }));
-app.post('/orders', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post('/api/orders', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { user_id } = req.body;
     const progress_status = 1;
     const total_amount = 0;
@@ -99,7 +95,7 @@ app.post('/orders', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     res.status(201).json(orders);
 }));
 // MARK: Item Routes
-app.get('/orders/:orderId/items', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.get('/api/orders/:orderId/items', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const orderId = parseInt(req.params.orderId, 10);
     if (isNaN(orderId)) {
         return res.status(400).send('Invalid order ID');
@@ -107,10 +103,14 @@ app.get('/orders/:orderId/items', (req, res) => __awaiter(void 0, void 0, void 0
     const items = yield (0, item_1.getItemsByOrderId)(orderId);
     res.json(items);
 }));
-app.post('/orders/:orderId/items', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+app.post('/api/orders/:orderId/items', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const orderId = parseInt(req.params.orderId, 10);
     if (isNaN(orderId)) {
         return res.status(400).send('Invalid order ID');
+    }
+    const orderCheck = yield db_1.default.query('SELECT id FROM orders WHERE id = $1', [orderId]);
+    if (orderCheck.rowCount === 0) {
+        return res.status(400).send('Order does not exist');
     }
     const { item_name, item_price } = req.body;
     const newItem = yield (0, item_1.createItem)(orderId, item_name, item_price);
