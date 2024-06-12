@@ -9,7 +9,7 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 const corsOptions = {
-  origin: ['https://erp-maybe.vercel.app', 'https://erp-maybeoneday-6dfo.onrender.com', 'http://localhost:3000'],
+  origin: ['https://erp-maybe.vercel.app', 'https://erp-maybeoneday-6dfo.onrender.com', 'http://localhost:3000', 'http://localhost:3000/', 'https://erp-maybe.vercel.app/'],
   optionsSuccessStatus: 200
 };
 

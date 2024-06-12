@@ -22,7 +22,7 @@ export const createUser = async (
 ): Promise<InternalUser> => {
   const response = await fetch(`${API_URL}/users`, {
     method: 'POST',
-    mode: 'no-cors',
+    // mode: 'no-cors',
     headers: {
       'Content-Type': 'application/json',
     },
@@ -39,7 +39,7 @@ export const createUser = async (
 export const deleteUser = async (id: number): Promise<{ success: boolean }> => {
   const response = await fetch(`${API_URL}/users/${id}`, {
     method: 'DELETE',
-    mode: 'no-cors'
+    // mode: 'no-cors'
   })
   if (!response.ok) {
     throw new Error('Error deleting user😶‍🌫️')
@@ -81,7 +81,7 @@ export async function createItem(
     `${API_URL}/orders/${orderId}/items`,
     {
       method: 'POST',
-      mode: 'no-cors',
+      // mode: 'no-cors',
       headers: {
         'Content-Type': 'application/json',
       },
