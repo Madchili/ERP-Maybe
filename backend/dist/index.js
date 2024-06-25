@@ -20,12 +20,12 @@ const item_1 = require("./models/item");
 const db_1 = __importDefault(require("./db"));
 const app = (0, express_1.default)();
 const port = process.env.PORT || 5000;
-const corsOptions = {
-    origin: ['https://erp-maybe.vercel.app', 'https://erp-maybeoneday-6dfo.onrender.com', 'http://localhost:3000', 'http://localhost:3000/', 'https://erp-maybe.vercel.app/'],
-    optionsSuccessStatus: 200
-};
-app.use((0, cors_1.default)(corsOptions));
-// app.use(cors());
+// const corsOptions = {
+//   origin: ['https://erp-maybe.vercel.app', 'https://erp-maybeoneday-6dfo.onrender.com', 'http://localhost:3000', 'http://localhost:3000/', 'https://erp-maybe.vercel.app/'],
+//   optionsSuccessStatus: 200
+// };
+// app.use(cors(corsOptions));
+app.use((0, cors_1.default)());
 app.use(express_1.default.json());
 // MARK: User Routes
 app.get('/api/users/:id', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
